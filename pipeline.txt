@@ -1,0 +1,12 @@
+pipeline {
+    agent {
+        docker { image 'owasp/zap2docker-stable' }
+    }
+    stages {
+        stage('Test') {
+            steps {
+                sh 'docker run -t owasp/zap2docker-stable zap-baseline.py -t http://testphp.vulnweb.com/'
+            }
+        }
+    }
+}
